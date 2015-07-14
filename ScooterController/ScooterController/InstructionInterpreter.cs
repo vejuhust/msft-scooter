@@ -25,9 +25,14 @@ namespace ScooterController
             { HardwareOperator.MoveBack, "bk" },     
             { HardwareOperator.TurnLeft, "lt" },     
             { HardwareOperator.TurnRight, "rt" },     
-        }; 
+        };
 
-        public InstructionInterpreter(string filename = "instruction.scl")
+        public InstructionInterpreter()
+        {
+            this.instructionRawLines = null;
+        }
+
+        public InstructionInterpreter(string filename)
         {
             using (var file = new StreamReader(filename))
             {
@@ -48,18 +53,10 @@ namespace ScooterController
             string rawLine;
             while ((rawLine = this.GetNextRawLine()) != null)
             {
-                var line = CleanUpRawLine(rawLine);
-                if (line != null)
+                HardwareInstruction instructionResult;
+                if ((instructionResult = this.InterpretRawLine(rawLine)) != null)
                 {
-                    var result = InterpretInstructionLine(line);
-                    if (result == null)
-                    {
-                        throw new Exception("Unknown Instruction");
-                    }
-                    else
-                    {
-                        return result;
-                    }
+                    return instructionResult;
                 }
             }
 
@@ -68,9 +65,9 @@ namespace ScooterController
 
         private string GetNextRawLine()
         {
-            return this.counterRawLine >= instructionRawLines.Count 
-                ? null 
-                : instructionRawLines[this.counterRawLine++];
+            return this.instructionRawLines != null && this.counterRawLine < this.instructionRawLines.Count
+                ? this.instructionRawLines[this.counterRawLine++]
+                : null;
         }
 
         private static string CleanUpRawLine(string rawLine)
@@ -81,6 +78,25 @@ namespace ScooterController
             return !string.IsNullOrWhiteSpace(line) ? line : null;
         }
 
+        public HardwareInstruction InterpretRawLine(string rawLine)
+        {
+            var line = CleanUpRawLine(rawLine);
+            if (line == null)
+            {
+                return null;
+            }
+
+            var result = InterpretInstructionLine(line);
+            if (result == null)
+            {
+                throw new Exception("Unknown Instruction");
+            }
+            else
+            {
+                return result;
+            }
+        }
+
         private HardwareInstruction InterpretInstructionLine(string line)
         {
             var pair = line.Split(HardwareInstruction.OperatorSeparators, StringSplitOptions.RemoveEmptyEntries);
@@ -88,26 +104,26 @@ namespace ScooterController
             switch (pair.Count())
             {
                 case 1:
-                {
-                    var rawOperator = pair[0];
-                    var instructionOperator = StringToHardwareOperator(NullaryOperatorMapping, rawOperator);
-                    if (instructionOperator != HardwareOperator.NoOp)
-                    {       
-                        return new HardwareInstruction(instructionOperator);
+                    {
+                        var rawOperator = pair[0];
+                        var instructionOperator = StringToHardwareOperator(NullaryOperatorMapping, rawOperator);
+                        if (instructionOperator != HardwareOperator.NoOp)
+                        {
+                            return new HardwareInstruction(instructionOperator);
+                        }
                     }
-                }
                     break;
                 case 2:
-                {
-                    var rawOperator = pair[0];
-                    var instructionOperator = StringToHardwareOperator(UnaryOperatorMapping, rawOperator);
-                    if (instructionOperator != HardwareOperator.NoOp)
                     {
-                        var rawOperand = pair[1];
-                        var instructionOperand = StringToHardwareOperand(rawOperand);
-                        return new HardwareInstruction(instructionOperator, instructionOperand);
+                        var rawOperator = pair[0];
+                        var instructionOperator = StringToHardwareOperator(UnaryOperatorMapping, rawOperator);
+                        if (instructionOperator != HardwareOperator.NoOp)
+                        {
+                            var rawOperand = pair[1];
+                            var instructionOperand = StringToHardwareOperand(rawOperand);
+                            return new HardwareInstruction(instructionOperator, instructionOperand);
+                        }
                     }
-                }
                     break;
             }
 
