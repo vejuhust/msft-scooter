@@ -78,7 +78,7 @@ namespace ScooterController
             LogInfo(string.Format("Move Forward for {0} Units", unit));
 
             var channel = HardwareSetting.ChannelMoveForward;
-            var intervalSeconds = HardwareSetting.IntervalMove * unit;
+            var intervalSeconds = HardwareSetting.IntervalMoveForward * unit;
 
             this.OpenChannel(channel);
             this.Suspend(intervalSeconds);
@@ -90,7 +90,7 @@ namespace ScooterController
             LogInfo(string.Format("Move Back for {0} Units", unit));
 
             var channel = HardwareSetting.ChannelMoveBack;
-            var intervalSeconds = HardwareSetting.IntervalMove * unit;
+            var intervalSeconds = HardwareSetting.IntervalMoveBack * unit;
 
             this.OpenChannel(channel);
             this.Suspend(intervalSeconds);
