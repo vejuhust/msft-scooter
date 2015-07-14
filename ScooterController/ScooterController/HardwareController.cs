@@ -59,6 +59,12 @@ namespace ScooterController
                 case HardwareOperator.MoveBack:
                     this.ActMoveBack(instruction.Operand);
                     break;
+                case HardwareOperator.TurnLeft:
+                    this.ActTurnLeft(instruction.Operand);
+                    break;
+                case HardwareOperator.TurnRight:
+                    this.ActTurnRight(instruction.Operand);
+                    break;
             }
         }
 
@@ -84,6 +90,33 @@ namespace ScooterController
             this.OpenChannel(channel);
             this.Suspend(intervalSeconds);
             this.CloseChannel(channel);
+        }
+
+        private void ActTurnLeft(long unit)
+        {
+            LogInfo(string.Format("Turn Left for {0} Units", unit));
+
+            var channel = HardwareSetting.ChannelTurnLeft;
+            var intervalSeconds = HardwareSetting.IntervalTurn * unit;
+
+            this.OpenChannel(channel);
+            this.Suspend(intervalSeconds);
+            this.CloseChannel(channel);
+
+            this.Suspend(HardwareSetting.IntervalInstruction);
+        }
+        private void ActTurnRight(long unit)
+        {
+            LogInfo(string.Format("Turn Right for {0} Units", unit));
+
+            var channel = HardwareSetting.ChannelTurnRight;
+            var intervalSeconds = HardwareSetting.IntervalTurn * unit;
+
+            this.OpenChannel(channel);
+            this.Suspend(intervalSeconds);
+            this.CloseChannel(channel);
+
+            this.Suspend(HardwareSetting.IntervalInstruction);
         }
 
         private void Suspend(double timeoutSeconds)
