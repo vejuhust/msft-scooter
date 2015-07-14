@@ -27,14 +27,14 @@ namespace ScooterController
         /// Enumerate the USB Relay Devices.
         /// </summary>
         /// <returns></returns>
-        [DllImport("usb_relay_device.dll", EntryPoint = "usb_relay_device_enumerate")]
+        [DllImport("usb_relay_device.dll", EntryPoint = "usb_relay_device_enumerate", CallingConvention = CallingConvention.Cdecl)]
         public static extern UsbRelayDeviceInfo Enumerate();
 
         /// <summary>
         /// Free an enumeration Linked List
         /// </summary>
         /// <param name="deviceInfo"></param>
-        [DllImport("usb_relay_device.dll", EntryPoint = "usb_relay_device_free_enumerate")]
+        [DllImport("usb_relay_device.dll", EntryPoint = "usb_relay_device_free_enumerate", CallingConvention = CallingConvention.Cdecl)]
         public static extern void FreeEnumerate(UsbRelayDeviceInfo deviceInfo);
 
         /// <summary>
@@ -43,7 +43,7 @@ namespace ScooterController
         /// <param name="serialNumber"></param>
         /// <param name="stringLength"></param>
         /// <returns>This funcation returns a valid handle to the device on success or NULL on failure.</returns>
-        [DllImport("usb_relay_device.dll", EntryPoint = "usb_relay_device_open_with_serial_number", CharSet = CharSet.Ansi)]
+        [DllImport("usb_relay_device.dll", EntryPoint = "usb_relay_device_open_with_serial_number", CharSet = CharSet.Ansi, CallingConvention = CallingConvention.Cdecl)]
         public static extern int OpenWithSerialNumber([MarshalAs(UnmanagedType.LPStr)] string serialNumber, int stringLength);
 
         /// <summary>
@@ -51,14 +51,14 @@ namespace ScooterController
         /// </summary>
         /// <param name="deviceInfo"></param>
         /// <returns>This funcation returns a valid handle to the device on success or NULL on failure.</returns>
-        [DllImport("usb_relay_device.dll", EntryPoint = "usb_relay_device_open")]
+        [DllImport("usb_relay_device.dll", EntryPoint = "usb_relay_device_open", CallingConvention = CallingConvention.Cdecl)]
         public static extern int Open(UsbRelayDeviceInfo deviceInfo);
 
         /// <summary>
         /// Close a usb relay device
         /// </summary>
         /// <param name="hHandle"></param>
-        [DllImport("usb_relay_device.dll", EntryPoint = "usb_relay_device_close")]
+        [DllImport("usb_relay_device.dll", EntryPoint = "usb_relay_device_close", CallingConvention = CallingConvention.Cdecl)]
         public static extern void Close(int hHandle);
 
         /// <summary>
@@ -67,7 +67,7 @@ namespace ScooterController
         /// <param name="hHandle">Which usb relay device your want to operate</param>
         /// <param name="index">Which channel your want to open</param>
         /// <returns>0 -- success; 1 -- error; 2 -- index is outnumber the number of the usb relay device</returns>
-        [DllImport("usb_relay_device.dll", EntryPoint = "usb_relay_device_open_one_relay_channel")]
+        [DllImport("usb_relay_device.dll", EntryPoint = "usb_relay_device_open_one_relay_channel", CallingConvention = CallingConvention.Cdecl)]
         public static extern int OpenOneRelayChannel(int hHandle, int index);
 
         /// <summary>
@@ -75,7 +75,7 @@ namespace ScooterController
         /// </summary>
         /// <param name="hHandle">which usb relay device your want to operate</param>
         /// <returns>0 -- success; 1 -- error</returns>
-        [DllImport("usb_relay_device.dll", EntryPoint = "usb_relay_device_open_all_relay_channel")]
+        [DllImport("usb_relay_device.dll", EntryPoint = "usb_relay_device_open_all_relay_channel", CallingConvention = CallingConvention.Cdecl)]
         public static extern int OpenAllRelayChannels(int hHandle);
 
         /// <summary>
@@ -84,7 +84,7 @@ namespace ScooterController
         /// <param name="hHandle">which usb relay device your want to operate</param>
         /// <param name="index">which channel your want to close</param>
         /// <returns>0 -- success; 1 -- error; 2 -- index is outnumber the number of the usb relay device</returns>
-        [DllImport("usb_relay_device.dll", EntryPoint = "usb_relay_device_close_one_relay_channel")]
+        [DllImport("usb_relay_device.dll", EntryPoint = "usb_relay_device_close_one_relay_channel", CallingConvention = CallingConvention.Cdecl)]
         public static extern int CloseOneRelayChannel(int hHandle, int index);
 
         /// <summary>
@@ -92,7 +92,7 @@ namespace ScooterController
         /// </summary>
         /// <param name="hHandle">hich usb relay device your want to operate</param>
         /// <returns>0 -- success; 1 -- error</returns>
-        [DllImport("usb_relay_device.dll", EntryPoint = "usb_relay_device_close_all_relay_channel")]
+        [DllImport("usb_relay_device.dll", EntryPoint = "usb_relay_device_close_all_relay_channel", CallingConvention = CallingConvention.Cdecl)]
         public static extern int CloseAllRelayChannels(int hHandle);
 
         /// <summary>
@@ -103,7 +103,7 @@ namespace ScooterController
         /// <param name="hHandle"></param>
         /// <param name="status"></param>
         /// <returns>0 -- success; 1 -- error</returns>
-        [DllImport("usb_relay_device.dll", EntryPoint = "usb_relay_device_get_status")]
+        [DllImport("usb_relay_device.dll", EntryPoint = "usb_relay_device_get_status", CallingConvention = CallingConvention.Cdecl)]
         public static extern int GetStatus(int hHandle, ref int status);
     }
 
@@ -119,9 +119,11 @@ namespace ScooterController
         [MarshalAs(UnmanagedType.LPStr)]
         public string DevicePath;
 
-        public UsbRelayDeviceType Type { get; set; }
+        [MarshalAs(UnmanagedType.I4)] 
+        public UsbRelayDeviceType Type;
 
-        public UsbRelayDeviceInfo Next { get; set; }
+        [MarshalAs(UnmanagedType.LPStruct)]
+        public UsbRelayDeviceInfo Next;
     }
 
     public enum UsbRelayDeviceType

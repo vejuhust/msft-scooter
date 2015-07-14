@@ -16,19 +16,20 @@ namespace ScooterController
                 return;
             }
 
-            //string serial = "FDP2R";
-            //int deviceHandle = UsbRelayDevice.OpenWithSerialNumber(serial, serial.Length);
-            //int openResult = UsbRelayDevice.OpenOneRelayChannel(deviceHandle, 1);
-            //if (openResult == 1)
-            //{
-            //    Console.WriteLine("Got error from OpenOneRelayChannel!");
-            //    return;
-            //}
-            //else if (openResult == 2)
-            //{
-            //    Console.WriteLine("Index is out of range on the usb relay device");
-            //    return;
-            //}
+            string serial = "FDP2R";
+            int deviceHandle = UsbRelayDevice.OpenWithSerialNumber(serial, serial.Length);
+            int openResult = UsbRelayDevice.OpenOneRelayChannel(deviceHandle, 1);
+            if (openResult == 1)
+            {
+                Console.WriteLine("Got error from OpenOneRelayChannel!");
+                return;
+            }
+            else if (openResult == 2)
+            {
+                Console.WriteLine("Index is out of range on the usb relay device");
+                return;
+            }
+            int closeResult = UsbRelayDevice.CloseOneRelayChannel(deviceHandle, 1);
 
             var x = UsbRelayDevice.Enumerate();
             if (x == null)
