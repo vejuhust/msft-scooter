@@ -6,6 +6,8 @@ namespace ScooterController
 {
     class InstructionInterpreter
     {
+        private const string CommentSymbol = ";";
+
         private readonly List<string> instructionRawLines;
 
         private int counterRawLine = 0;
@@ -28,10 +30,14 @@ namespace ScooterController
 
         public HardwareInstruction GetNextInstruction()
         {
-            string line;
-            while ((line = this.GetNextRawLine()) != null)
+            string rawLine;
+            while ((rawLine = this.GetNextRawLine()) != null)
             {
-                Console.WriteLine(line);
+                var line = CleanUpRawLine(rawLine);
+                if (line != null)
+                {
+                    Console.WriteLine("~" + line + "~");
+                }
             }
 
             return new HardwareInstruction();
@@ -42,6 +48,14 @@ namespace ScooterController
             return this.counterRawLine >= instructionRawLines.Count 
                 ? null 
                 : instructionRawLines[this.counterRawLine++];
+        }
+
+        private static string CleanUpRawLine(string rawLine)
+        {
+            var commentIndex = rawLine.IndexOf(CommentSymbol, StringComparison.InvariantCultureIgnoreCase);
+            var line = commentIndex >= 0 ? rawLine.Substring(0, commentIndex) : rawLine;
+            line = line.Trim();
+            return !string.IsNullOrWhiteSpace(line) ? line : null;
         }
     }
 }
