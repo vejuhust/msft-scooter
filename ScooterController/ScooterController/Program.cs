@@ -11,6 +11,12 @@ namespace ScooterController
         static void Main(string[] args)
         {
             var parser = new InstructionInterrupter();
+
+            //HardwareInstruction instruction;
+            //while ((instruction = parser.GetNextInstruction()) != HardwareInstruction.NoOp)
+            //{
+            //    Console.WriteLine(instruction);                
+            //}
         }
     }
 }

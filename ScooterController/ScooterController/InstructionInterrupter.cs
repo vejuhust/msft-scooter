@@ -26,5 +26,10 @@ namespace ScooterController
                 this.instructionRawLines = lines;
             }
         }
+
+        public HardwareOperator GetNextInstruction()
+        {
+            return HardwareOperator.NoOp;
+        }
     }
 }
