@@ -41,10 +41,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="HardwareInstruction.cs" />
     <Compile Include="InstructionInterrupter.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="HardwareInstruction.cs" />
+    <Compile Include="HardwareOperator.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

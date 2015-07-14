@@ -27,9 +27,9 @@ namespace ScooterController
             }
         }
 
-        public HardwareOperator GetNextInstruction()
+        public HardwareInstruction GetNextInstruction()
         {
-            return HardwareOperator.NoOp;
+            return new HardwareInstruction();
         }
     }
 }
