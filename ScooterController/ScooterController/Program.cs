@@ -6,7 +6,7 @@ namespace ScooterController
     {
         static void Main(string[] args)
         {
-            var parser = new InstructionInterrupter();
+            var parser = new InstructionInterpreter();
 
             HardwareInstruction instruction;
             while ((instruction = parser.GetNextInstruction()) != null)

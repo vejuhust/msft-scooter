@@ -3,11 +3,11 @@ using System.IO;
 
 namespace ScooterController
 {
-    class InstructionInterrupter
+    class InstructionInterpreter
     {
         private readonly List<string> instructionRawLines;
 
-        public InstructionInterrupter(string filename = "instruction.txt")
+        public InstructionInterpreter(string filename = "instruction.txt")
         {
             using (var file = new StreamReader(filename))
             {
