@@ -4,18 +4,15 @@ namespace ScooterController
 {
     class Program
     {
-        static void Main(string[] args)
+        private static void ExecuteInstructionFromFile(string filename)
         {
-            var parser = args.Length >= 1 
-                ? new InstructionInterpreter(args[0])
-                : new InstructionInterpreter();
-
+            var parser = new InstructionInterpreter(filename);
             var controller = new HardwareController();
 
             HardwareInstruction instruction;
             while ((instruction = parser.GetNextInstruction()) != null)
             {
-                Console.WriteLine("\n[{0}{1}]", instruction.Operator, instruction.HasOperand ? " " + instruction.Operand.ToString() : string.Empty);
+                Console.WriteLine("\n[{0}{1}]", instruction.Operator, instruction.HasOperand ? " " + instruction.Operand : string.Empty);
 
                 if (instruction.Operator == HardwareOperator.NoOp || instruction.Operator == HardwareOperator.Exit)
                 {
@@ -23,6 +20,14 @@ namespace ScooterController
                 }
 
                 controller.ExecuteInstruction(instruction);
+            }
+        }
+
+        static void Main(string[] args)
+        {
+            if (args.Length >= 1)
+            {
+                ExecuteInstructionFromFile(args[0]);
             }
         }
     }
