@@ -8,6 +8,7 @@ namespace ScooterController
 {
     enum HardwareInstruction
     {
+        NoOp,           /* <blank> */
         PowerOn,        /* on */
         PowerOff,       /* off */
         MoveForward,    /* fd */
@@ -15,6 +16,6 @@ namespace ScooterController
         Brake,          /* ?? */
         SetSpeed,       /* sp */
         TurnLeft,       /* lt */
-        TurnRight       /* rt */
+        TurnRight,      /* rt */
     }
 }
