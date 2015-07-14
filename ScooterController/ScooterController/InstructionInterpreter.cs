@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 
 namespace ScooterController
 {
     class InstructionInterpreter
     {
-        private const string CommentSymbol = ";";
 
         private readonly List<string> instructionRawLines;
 
@@ -36,7 +36,8 @@ namespace ScooterController
                 var line = CleanUpRawLine(rawLine);
                 if (line != null)
                 {
-                    Console.WriteLine("~" + line + "~");
+                    var pair = line.Split(HardwareInstruction.OperatorSeparators, StringSplitOptions.RemoveEmptyEntries);
+                    Console.WriteLine("~" + pair.Count() + "~" + pair[0]);
                 }
             }
 
@@ -52,7 +53,7 @@ namespace ScooterController
 
         private static string CleanUpRawLine(string rawLine)
         {
-            var commentIndex = rawLine.IndexOf(CommentSymbol, StringComparison.InvariantCultureIgnoreCase);
+            var commentIndex = rawLine.IndexOf(HardwareInstruction.CommentSymbol, StringComparison.InvariantCultureIgnoreCase);
             var line = commentIndex >= 0 ? rawLine.Substring(0, commentIndex) : rawLine;
             line = line.Trim();
             return !string.IsNullOrWhiteSpace(line) ? line : null;
