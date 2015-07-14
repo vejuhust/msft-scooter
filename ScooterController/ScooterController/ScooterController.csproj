@@ -52,11 +52,14 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="test.scl">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="instruction.txt">
+    <None Include="demo.scl">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
+    </None>
     <Content Include="usb_relay_device.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

@@ -27,7 +27,7 @@ namespace ScooterController
             { HardwareOperator.TurnRight, "rt" },     
         }; 
 
-        public InstructionInterpreter(string filename = "instruction.txt")
+        public InstructionInterpreter(string filename = "instruction.scl")
         {
             using (var file = new StreamReader(filename))
             {
