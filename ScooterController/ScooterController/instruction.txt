@@ -25,10 +25,10 @@ fd 1
 lt 1
 
 ; set speed back to default
-sp 1
+sp  1
 
 ; move a bit further
-fd 3 
+fd  3 
 
 ; goodbye, cruel world!
 off

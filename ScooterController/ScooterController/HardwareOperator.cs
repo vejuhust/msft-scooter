@@ -3,14 +3,14 @@ namespace ScooterController
 {
     enum HardwareOperator
     {
-        NoOp,           /* <blank> */
-        PowerOn,        /* on */
-        PowerOff,       /* off */
-        MoveForward,    /* fd */
-        MoveBack,       /* bk */
-        Brake,          /* ?? */
-        SetSpeed,       /* sp */
-        TurnLeft,       /* lt */
-        TurnRight,      /* rt */
+        NoOp,           /* 0: <blank> */
+        PowerOn,        /* 1: on */
+        PowerOff,       /* 2: off */
+        SetSpeed,       /* 3: sp */
+        MoveForward,    /* 4: fd */
+        MoveBack,       /* 5: bk */
+        TurnLeft,       /* 6: lt */
+        TurnRight,      /* 7: rt */
+        Brake,          /* 8: ?? */
     }
 }
