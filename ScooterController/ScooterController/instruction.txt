@@ -1,0 +1,34 @@
+﻿; title: First Scooter Control Language Script
+; author: Wei Ye
+; date:	2015.07.14
+
+; hello, scooter world!
+on
+
+; set speed as 1 (default)
+sp 1
+
+fd 2 ; move forward
+bk 1 ; move back
+
+; turn left
+lt 2
+fd 1
+rt 2
+
+; set speed as 2 (faster)
+sp 2
+
+; turn right
+rt 1
+fd 1
+lt 1
+
+; set speed back to default
+sp 1
+
+; move a bit further
+fd 3 
+
+; goodbye, cruel world!
+off
