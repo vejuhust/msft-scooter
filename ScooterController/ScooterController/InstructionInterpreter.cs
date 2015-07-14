@@ -50,8 +50,15 @@ namespace ScooterController
                 var line = CleanUpRawLine(rawLine);
                 if (line != null)
                 {
-                    var pair = line.Split(HardwareInstruction.OperatorSeparators, StringSplitOptions.RemoveEmptyEntries);
-                    Console.WriteLine("~" + pair.Count() + "~" + pair[0]);
+                    var result = InterpretInstructionLine(line);
+                    if (result == null)
+                    {
+                        throw new Exception("Unknown Instruction");
+                    }
+                    else
+                    {
+                        return result;
+                    }
                 }
             }
 
@@ -71,6 +78,49 @@ namespace ScooterController
             var line = commentIndex >= 0 ? rawLine.Substring(0, commentIndex) : rawLine;
             line = line.Trim().ToLowerInvariant();
             return !string.IsNullOrWhiteSpace(line) ? line : null;
+        }
+
+        private HardwareInstruction InterpretInstructionLine(string line)
+        {
+            var pair = line.Split(HardwareInstruction.OperatorSeparators, StringSplitOptions.RemoveEmptyEntries);
+
+            switch (pair.Count())
+            {
+                case 1:
+                {
+                    var rawOperator = pair[0];
+                    var instructionOperator = StringToHardwareOperator(NullaryOperatorMapping, rawOperator);
+                    if (instructionOperator != HardwareOperator.NoOp)
+                    {       
+                        return new HardwareInstruction(instructionOperator);
+                    }
+                }
+                    break;
+                case 2:
+                {
+                    var rawOperator = pair[0];
+                    var instructionOperator = StringToHardwareOperator(UnaryOperatorMapping, rawOperator);
+                    if (instructionOperator != HardwareOperator.NoOp)
+                    {
+                        var rawOperand = pair[1];
+                        var instructionOperand = StringToHardwareOperand(rawOperand);
+                        return new HardwareInstruction(instructionOperator, instructionOperand);
+                    }
+                }
+                    break;
+            }
+
+            return null;
+        }
+
+        private static HardwareOperator StringToHardwareOperator(Dictionary<HardwareOperator, string> mapping, string rawString)
+        {
+            return (from op in mapping where op.Value == rawString select op.Key).FirstOrDefault();
+        }
+
+        private static long StringToHardwareOperand(string rawString)
+        {
+            return Convert.ToInt64(rawString);
         }
     }
 }
