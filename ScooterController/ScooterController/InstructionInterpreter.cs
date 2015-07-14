@@ -15,6 +15,7 @@ namespace ScooterController
         {
             { HardwareOperator.PowerOn, "on" },     
             { HardwareOperator.PowerOff, "off" },     
+            { HardwareOperator.Exit, "exit" },     
         };
 
         private static Dictionary<HardwareOperator, string> UnaryOperatorMapping = new Dictionary<HardwareOperator, string>()
@@ -26,7 +27,7 @@ namespace ScooterController
             { HardwareOperator.TurnRight, "rt" },     
         }; 
 
-        public InstructionInterpreter(string filename = "instruction.txt")
+        public InstructionInterpreter(string filename = "instruction.scl")
         {
             using (var file = new StreamReader(filename))
             {

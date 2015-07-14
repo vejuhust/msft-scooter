@@ -12,5 +12,6 @@ namespace ScooterController
         TurnLeft,       /* 6: lt */
         TurnRight,      /* 7: rt */
         Brake,          /* 8: ?? */
+        Exit,           /* 9: exit */
     }
 }
