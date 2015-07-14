@@ -56,6 +56,9 @@ namespace ScooterController
                 case HardwareOperator.MoveForward:
                     this.ActMoveForward(instruction.Operand);
                     break;
+                case HardwareOperator.MoveBack:
+                    this.ActMoveBack(instruction.Operand);
+                    break;
             }
         }
 
@@ -63,11 +66,24 @@ namespace ScooterController
         {
             LogInfo(string.Format("Move Forward for {0} Units", unit));
 
+            var channel = HardwareSetting.ChannelMoveForward;
             var intervalSeconds = HardwareSetting.IntervalMove * unit;
 
-            this.OpenChannel(HardwareSetting.ChannelMoveForward);
+            this.OpenChannel(channel);
             this.Suspend(intervalSeconds);
-            this.CloseChannel(HardwareSetting.ChannelMoveForward);
+            this.CloseChannel(channel);
+        }
+
+        private void ActMoveBack(long unit)
+        {
+            LogInfo(string.Format("Move Back for {0} Units", unit));
+
+            var channel = HardwareSetting.ChannelMoveBack;
+            var intervalSeconds = HardwareSetting.IntervalMove * unit;
+
+            this.OpenChannel(channel);
+            this.Suspend(intervalSeconds);
+            this.CloseChannel(channel);
         }
 
         private void Suspend(double timeoutSeconds)

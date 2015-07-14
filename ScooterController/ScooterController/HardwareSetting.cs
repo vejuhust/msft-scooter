@@ -25,7 +25,7 @@ namespace ScooterController
 
         public static double IntervalInstruction = 0.5;
 
-        public static double IntervalMove = 2;
+        public static double IntervalMove = 1.5;
 
         public static double IntervalTurn = 1;
     }

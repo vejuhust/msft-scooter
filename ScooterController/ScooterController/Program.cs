@@ -8,6 +8,7 @@ namespace ScooterController
         {
             var controller = new HardwareController();
             controller.ExecuteInstruction(new HardwareInstruction(HardwareOperator.MoveForward, 1));
+            controller.ExecuteInstruction(new HardwareInstruction(HardwareOperator.MoveBack, 1));
 
             return;
 
