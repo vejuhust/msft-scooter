@@ -26,29 +26,31 @@ namespace ScooterController
             }
 
             this.deviceHandle = UsbRelayDevice.OpenWithSerialNumber(HardwareSetting.SerialNumber, HardwareSetting.SerialNumber.Length);
-            this.OpenChannel(5);
+            this.OpenChannel(HardwareSetting.ChannelPower);
+
+            this.Connect();
         }
 
         ~HardwareController()
         {
-            this.CloseChannel(5);
+            this.CloseChannel(HardwareSetting.ChannelPower);
             UsbRelayDevice.Close(this.deviceHandle);
         }
 
         public void Connect()
         {
             // Connect
-            this.OpenChannel(3);
-            this.Suspend(5);
-            this.CloseChannel(3);
+            this.OpenChannel(HardwareSetting.ChannelConnect);
+            this.Suspend(HardwareSetting.IntervalConnect);
+            this.CloseChannel(HardwareSetting.ChannelConnect);
            
             // Interval between instructions
-            this.Suspend(0.5);
+            this.Suspend(HardwareSetting.IntervalInstruction);
 
-            // Back
-            this.OpenChannel(2);
-            this.Suspend(1);
-            this.CloseChannel(2);
+            // Forward
+            this.OpenChannel(HardwareSetting.ChannelMoveForward);
+            this.Suspend(HardwareSetting.IntervalMove);
+            this.CloseChannel(HardwareSetting.ChannelMoveForward);
         }
 
         private void Suspend(double timeoutSeconds)

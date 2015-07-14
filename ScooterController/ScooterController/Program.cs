@@ -7,7 +7,7 @@ namespace ScooterController
         static void Main(string[] args)
         {
             var controller = new HardwareController();
-            controller.Connect();
+            //controller.Connect();
 
             return;
 
