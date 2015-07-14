@@ -18,16 +18,17 @@ namespace ScooterController
             throw new Exception(message);
         }
 
-        public HardwareController(string serialNumber = "FDP2R")
+        public HardwareController()
         {
             if (UsbRelayDevice.Init() != 0)
             {
                 LogError("Couldn't initialize!");
             }
 
-            this.deviceHandle = UsbRelayDevice.OpenWithSerialNumber(serialNumber, serialNumber.Length);
+            this.deviceHandle = UsbRelayDevice.OpenWithSerialNumber(HardwareSetting.SerialNumber, HardwareSetting.SerialNumber.Length);
             this.OpenChannel(5);
         }
+
         ~HardwareController()
         {
             this.CloseChannel(5);

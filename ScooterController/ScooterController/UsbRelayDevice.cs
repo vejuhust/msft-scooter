@@ -4,7 +4,7 @@ using System.Runtime.InteropServices;
 
 namespace ScooterController
 {
-    public static class UsbRelayDevice
+    static class UsbRelayDevice
     {
         /// <summary>
         /// Init the USB Relay Libary
