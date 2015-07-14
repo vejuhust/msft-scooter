@@ -11,6 +11,7 @@ namespace ScooterController
             controller.ExecuteInstruction(new HardwareInstruction(HardwareOperator.MoveBack, 1));
             controller.ExecuteInstruction(new HardwareInstruction(HardwareOperator.TurnLeft, 1));
             controller.ExecuteInstruction(new HardwareInstruction(HardwareOperator.TurnRight, 1));
+            controller.ExecuteInstruction(new HardwareInstruction(HardwareOperator.SetSpeed, 3));
                                                                                                 
             return;
 

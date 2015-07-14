@@ -8,6 +8,8 @@ namespace ScooterController
     {
         private readonly int deviceHandle;
 
+        private long currentSpeed = 1;
+
         public static void LogInfo(string message)
         {
             Console.WriteLine(message);
@@ -65,6 +67,9 @@ namespace ScooterController
                 case HardwareOperator.TurnRight:
                     this.ActTurnRight(instruction.Operand);
                     break;
+                case HardwareOperator.SetSpeed:
+                    this.SetSpeed(instruction.Operand);
+                    break;
             }
         }
 
@@ -117,6 +122,43 @@ namespace ScooterController
             this.CloseChannel(channel);
 
             this.Suspend(HardwareSetting.IntervalInstruction);
+        }
+
+        private void SetSpeed(long targetSpeed)
+        {
+            if (!(1 <= targetSpeed && targetSpeed <= 3))
+            {
+                LogError(string.Format("Target Speed '{0}' is invalid", targetSpeed));
+            }
+
+            long speedSetTimes = 0;
+            if (this.currentSpeed == targetSpeed)
+            {
+                LogInfo(string.Format("Speed '{0}' Remains Unchanged", this.currentSpeed));
+            }
+            else if (this.currentSpeed < targetSpeed)
+            {
+                LogInfo(string.Format("Speed Up From {0} To {1}", this.currentSpeed, targetSpeed));
+                speedSetTimes = targetSpeed - this.currentSpeed;
+            }
+            else
+            {
+                LogInfo(string.Format("Slow Down From {0} To {1}", this.currentSpeed, targetSpeed));
+                speedSetTimes = 3 + targetSpeed - this.currentSpeed;
+            }
+
+            var channel = HardwareSetting.ChannelSpeedUp;
+            var intervalSeconds = HardwareSetting.IntervalSpeed;
+            for (var i = 0; i < (int)speedSetTimes; i++)
+            {
+                this.OpenChannel(channel);
+                this.Suspend(intervalSeconds);
+                this.CloseChannel(channel);
+
+                this.Suspend(HardwareSetting.IntervalInstruction);
+            }
+
+            this.currentSpeed = targetSpeed;
         }
 
         private void Suspend(double timeoutSeconds)
