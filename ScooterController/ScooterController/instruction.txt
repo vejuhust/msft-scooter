@@ -2,6 +2,16 @@
 ; author: Wei Ye
 ; date:	2015.07.14
 
+
+; test
+fd 1
+bk 1
+rt 1
+lt 1
+sp 3
+exit
+
+
 ; hello, scooter world!
 on
 
