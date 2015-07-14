@@ -32,3 +32,6 @@ fd  3
 
 ; goodbye, cruel world!
 off
+
+; manually exit
+exit

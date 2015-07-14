@@ -15,6 +15,7 @@ namespace ScooterController
         {
             { HardwareOperator.PowerOn, "on" },     
             { HardwareOperator.PowerOff, "off" },     
+            { HardwareOperator.Exit, "exit" },     
         };
 
         private static Dictionary<HardwareOperator, string> UnaryOperatorMapping = new Dictionary<HardwareOperator, string>()
