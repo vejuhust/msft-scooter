@@ -12,12 +12,13 @@ namespace ScooterController
             HardwareInstruction instruction;
             while ((instruction = parser.GetNextInstruction()) != null)
             {
+                Console.WriteLine("\n[{0} {1}]", instruction.Operator, instruction.HasOperand ? instruction.Operand.ToString() : string.Empty);
+
                 if (instruction.Operator == HardwareOperator.NoOp || instruction.Operator == HardwareOperator.Exit)
                 {
                     break;
                 }
 
-                Console.WriteLine("\n[{0} {1}]", instruction.Operator, instruction.HasOperand ? instruction.Operand.ToString() : string.Empty);
                 controller.ExecuteInstruction(instruction);
             }
         }
