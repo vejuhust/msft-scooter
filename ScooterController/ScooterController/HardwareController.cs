@@ -1,41 +1,29 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿
+using System;
 
 namespace ScooterController
 {
     class HardwareController
     {
-        public HardwareController()
+        private readonly int deviceHandle;
+
+        public static void LogError(string message)
+        {
+            throw new Exception(message);
+        }
+
+        public HardwareController(string serialNumber = "FDP2R")
         {
             if (UsbRelayDevice.Init() != 0)
             {
-                Console.WriteLine("Couldn't initialize!");
-                return;
+                LogError("Couldn't initialize!");
             }
 
-            string serial = "FDP2R";
-            int deviceHandle = UsbRelayDevice.OpenWithSerialNumber(serial, serial.Length);
-            int openResult = UsbRelayDevice.OpenOneRelayChannel(deviceHandle, 1);
-            if (openResult == 1)
-            {
-                Console.WriteLine("Got error from OpenOneRelayChannel!");
-                return;
-            }
-            else if (openResult == 2)
-            {
-                Console.WriteLine("Index is out of range on the usb relay device");
-                return;
-            }
-            int closeResult = UsbRelayDevice.CloseOneRelayChannel(deviceHandle, 1);
-
-            var x = UsbRelayDevice.Enumerate();
-            if (x == null)
-            {
-
-            }
+            this.deviceHandle = UsbRelayDevice.OpenWithSerialNumber(serialNumber, serialNumber.Length);
+        }
+        ~HardwareController()
+        {
+            UsbRelayDevice.Close(this.deviceHandle);
         }
     }
 }
