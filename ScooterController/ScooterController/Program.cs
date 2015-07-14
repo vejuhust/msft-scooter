@@ -6,6 +6,11 @@ namespace ScooterController
     {
         static void Main(string[] args)
         {
+            var controller = new HardwareController();
+
+
+            return;
+
             var parser = new InstructionInterpreter();
 
             HardwareInstruction instruction;

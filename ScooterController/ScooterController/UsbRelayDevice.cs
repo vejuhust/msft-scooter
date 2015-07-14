@@ -113,9 +113,11 @@ namespace ScooterController
     [StructLayout(LayoutKind.Sequential, Pack=8)]
     public class UsbRelayDeviceInfo
     {
-        [MarshalAs(UnmanagedType.LPStr)] public string SerialNumber;
+        [MarshalAs(UnmanagedType.LPStr)]
+        public string SerialNumber;
 
-        [MarshalAs(UnmanagedType.LPStr)] public string DevicePath;
+        [MarshalAs(UnmanagedType.LPStr)]
+        public string DevicePath;
 
         public UsbRelayDeviceType Type { get; set; }
 

@@ -41,6 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="HardwareController.cs" />
     <Compile Include="HardwareInstruction.cs" />
     <Compile Include="InstructionInterpreter.cs" />
     <Compile Include="Program.cs" />
