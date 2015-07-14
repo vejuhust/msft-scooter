@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ScooterController
 {
-    enum ScooterInstruction
+    enum HardwareInstruction
     {
         PowerOn,        /* on */
         PowerOff,       /* off */
