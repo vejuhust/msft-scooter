@@ -40,23 +40,30 @@ namespace ScooterController
                 Console.Write("\n>>{0:D4}>>> ", instructionCounter);
                 var inputLine = Console.ReadLine();
 
-                var instruction = parser.InterpretRawLine(inputLine, true);
-                if (instruction == null)
+                try
                 {
-                    Console.WriteLine("[Invalid Instruction]");
-                }
-                else
-                {
-                    Console.WriteLine("[{0}{1}]", instruction.Operator, instruction.HasOperand ? " " + instruction.Operand : string.Empty);
-
-                    if (instruction.Operator == HardwareOperator.NoOp || instruction.Operator == HardwareOperator.Exit)
+                    var instruction = parser.InterpretRawLine(inputLine);
+                    if (instruction == null)
                     {
-                        break;
+                        Console.WriteLine("[Blank Instruction]");
                     }
                     else
                     {
-                        controller.ExecuteInstruction(instruction);
+                        Console.WriteLine("[{0}{1}]", instruction.Operator, instruction.HasOperand ? " " + instruction.Operand : string.Empty);
+
+                        if (instruction.Operator == HardwareOperator.NoOp || instruction.Operator == HardwareOperator.Exit)
+                        {
+                            break;
+                        }
+                        else
+                        {
+                            controller.ExecuteInstruction(instruction);
+                        }
                     }
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine("[Invalid Instruction: {0}]", e.Message);
                 }
             }
         }
