@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 
 namespace ScooterController
@@ -6,6 +7,8 @@ namespace ScooterController
     class InstructionInterpreter
     {
         private readonly List<string> instructionRawLines;
+
+        private int counterRawLine = 0;
 
         public InstructionInterpreter(string filename = "instruction.txt")
         {
@@ -25,7 +28,20 @@ namespace ScooterController
 
         public HardwareInstruction GetNextInstruction()
         {
+            string line;
+            while ((line = this.GetNextRawLine()) != null)
+            {
+                Console.WriteLine(line);
+            }
+
             return new HardwareInstruction();
+        }
+
+        private string GetNextRawLine()
+        {
+            return this.counterRawLine >= instructionRawLines.Count 
+                ? null 
+                : instructionRawLines[this.counterRawLine++];
         }
     }
 }
