@@ -25,9 +25,14 @@ namespace ScooterController
             { HardwareOperator.MoveBack, "bk" },     
             { HardwareOperator.TurnLeft, "lt" },     
             { HardwareOperator.TurnRight, "rt" },     
-        }; 
+        };
 
-        public InstructionInterpreter(string filename = "instruction.scl")
+        public InstructionInterpreter()
+        {
+            this.instructionRawLines = null;
+        }
+
+        public InstructionInterpreter(string filename)
         {
             using (var file = new StreamReader(filename))
             {
@@ -48,18 +53,10 @@ namespace ScooterController
             string rawLine;
             while ((rawLine = this.GetNextRawLine()) != null)
             {
-                var line = CleanUpRawLine(rawLine);
-                if (line != null)
+                HardwareInstruction instructionResult;
+                if ((instructionResult = this.InterpretRawLine(rawLine)) != null)
                 {
-                    var result = InterpretInstructionLine(line);
-                    if (result == null)
-                    {
-                        throw new Exception("Unknown Instruction");
-                    }
-                    else
-                    {
-                        return result;
-                    }
+                    return instructionResult;
                 }
             }
 
@@ -68,9 +65,9 @@ namespace ScooterController
 
         private string GetNextRawLine()
         {
-            return this.counterRawLine >= instructionRawLines.Count 
-                ? null 
-                : instructionRawLines[this.counterRawLine++];
+            return this.instructionRawLines != null && this.counterRawLine < this.instructionRawLines.Count 
+                ? this.instructionRawLines[this.counterRawLine++]
+                : null;
         }
 
         private static string CleanUpRawLine(string rawLine)
@@ -79,6 +76,32 @@ namespace ScooterController
             var line = commentIndex >= 0 ? rawLine.Substring(0, commentIndex) : rawLine;
             line = line.Trim().ToLowerInvariant();
             return !string.IsNullOrWhiteSpace(line) ? line : null;
+        }
+
+        public HardwareInstruction InterpretRawLine(string rawLine, bool failSilently = false)
+        {
+            var line = CleanUpRawLine(rawLine);
+            if (line == null)
+            {
+                return null;
+            }
+
+            var result = InterpretInstructionLine(line);
+            if (result == null)
+            {
+                if (failSilently)
+                {
+                    return null;
+                }
+                else
+                {
+                    throw new Exception("Unknown Instruction");
+                }
+            }
+            else
+            {
+                return result;
+            }
         }
 
         private HardwareInstruction InterpretInstructionLine(string line)
