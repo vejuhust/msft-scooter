@@ -39,17 +39,34 @@ namespace ScooterController
 
         public void Connect()
         {
-            // Connect
+            LogInfo("Connecting");
+            
             this.OpenChannel(HardwareSetting.ChannelConnect);
             this.Suspend(HardwareSetting.IntervalConnect);
             this.CloseChannel(HardwareSetting.ChannelConnect);
            
             // Interval between instructions
             this.Suspend(HardwareSetting.IntervalInstruction);
+        }
 
-            // Forward
+        public void ExecuteInstruction(HardwareInstruction instruction)
+        {
+            switch (instruction.Operator)
+            {
+                case HardwareOperator.MoveForward:
+                    this.ActMoveForward(instruction.Operand);
+                    break;
+            }
+        }
+
+        private void ActMoveForward(long unit)
+        {
+            LogInfo(string.Format("Move Forward for {0} Units", unit));
+
+            var intervalSeconds = HardwareSetting.IntervalMove * unit;
+
             this.OpenChannel(HardwareSetting.ChannelMoveForward);
-            this.Suspend(HardwareSetting.IntervalMove);
+            this.Suspend(intervalSeconds);
             this.CloseChannel(HardwareSetting.ChannelMoveForward);
         }
 
