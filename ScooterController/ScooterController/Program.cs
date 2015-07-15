@@ -30,7 +30,7 @@ namespace ScooterController
         private static void ExecuteInstructionFromKeyboard()
         {
             Console.WriteLine("Welcome to Scooter Keyboard!");
-            Console.WriteLine("# Use Arrow Keys, Alt and Spacebar to Control.");
+            Console.WriteLine("# Use WASD Keys, Alt and SpaceBar to Control.");
 
             var controller = new HardwareKeyboardController();
             do
@@ -38,6 +38,9 @@ namespace ScooterController
                 controller.ExecuteKeyboardInstruction();
                 controller.Suspend(0.05);
             } while (!controller.ShouldExit());
+
+            Console.SetCursorPosition(0, Console.CursorTop);
+            Console.WriteLine("Goodbye~");
         }
 
         private static void ExecuteInstructionFromFile(string filename)

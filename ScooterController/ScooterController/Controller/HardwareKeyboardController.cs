@@ -1,6 +1,6 @@
-﻿using System;
-using ScooterController.Configuration;
+﻿using ScooterController.Configuration;
 using ScooterController.HardwareAbstractionLayer;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -61,24 +61,33 @@ namespace ScooterController.Controller
                         if (targetStatus == true)
                         {
                             this.OpenChannel(targetChannel);
-                            LogInfo("open for " + key);
 
                             if (targetChannel == HardwareSetting.ChannelSpeedUp)
                             {
                                 this.currentSpeed = (this.currentSpeed + 1) % 3;
                                 this.currentSpeed += this.currentSpeed == 0 ? 3 : 0;
-                                LogInfo("set speed " + this.currentSpeed.ToString());
                             }
                         }
                         else
                         {
                             this.CloseChannel(targetChannel);
-                            LogInfo("close for " + key);
                         }
 
                         this.channelStatus[targetChannel] = targetStatus;
                     }
                 }
+
+                var statusLine = string.Format(
+                    "[{0}]{1}{2}{3}{4}{5}",
+                    this.currentSpeed,
+                    this.channelStatus[HardwareSetting.ChannelBrake] ? "⃝" : " ",
+                    this.channelStatus[HardwareSetting.ChannelTurnLeft] ? "←" : " ",
+                    this.channelStatus[HardwareSetting.ChannelMoveForward] ? "↑" : " ",
+                    this.channelStatus[HardwareSetting.ChannelMoveBack] ? "↓" : " ",
+                    this.channelStatus[HardwareSetting.ChannelTurnRight] ? "→" : " ");
+
+                Console.SetCursorPosition(0, Console.CursorTop);
+                Console.Write(statusLine);
             }
         }
 
