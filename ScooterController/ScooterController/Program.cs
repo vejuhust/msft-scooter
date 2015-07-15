@@ -1,4 +1,7 @@
-﻿using System;
+﻿using ScooterController.Controller;
+using ScooterController.InstructionSet;
+using ScooterController.Interpreter;
+using System;
 
 namespace ScooterController
 {

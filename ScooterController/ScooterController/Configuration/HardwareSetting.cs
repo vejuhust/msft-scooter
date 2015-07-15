@@ -1,5 +1,5 @@
 ﻿
-namespace ScooterController
+namespace ScooterController.Configuration
 {
     static class HardwareSetting
     {

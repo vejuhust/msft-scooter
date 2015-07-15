@@ -1,5 +1,5 @@
 ﻿
-namespace ScooterController
+namespace ScooterController.InstructionSet
 {
     class HardwareStatusCommand : HardwareSetBase
     {

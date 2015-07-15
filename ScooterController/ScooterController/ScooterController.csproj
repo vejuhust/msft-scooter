@@ -41,25 +41,25 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="HardwareController.cs" />
-    <Compile Include="HardwareInstruction.cs" />
-    <Compile Include="HardwareSetBase.cs" />
-    <Compile Include="HardwareSetting.cs" />
-    <Compile Include="HardwareStatusCommand.cs" />
-    <Compile Include="InstructionInterpreter.cs" />
+    <Compile Include="Controller\HardwareController.cs" />
+    <Compile Include="InstructionSet\HardwareInstruction.cs" />
+    <Compile Include="InstructionSet\HardwareSetBase.cs" />
+    <Compile Include="Configuration\HardwareSetting.cs" />
+    <Compile Include="InstructionSet\HardwareStatusCommand.cs" />
+    <Compile Include="Interpreter\InstructionInterpreter.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="HardwareOperator.cs" />
-    <Compile Include="UsbRelayDevice.cs" />
+    <Compile Include="InstructionSet\HardwareOperator.cs" />
+    <Compile Include="HardwareAbstractionLayer\UsbRelayDevice.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <None Include="test.scl">
+    <None Include="Script\test.scl">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
   <ItemGroup>
-    <None Include="demo.scl">
+    <None Include="Script\demo.scl">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <Content Include="usb_relay_device.dll">

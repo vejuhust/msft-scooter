@@ -1,9 +1,10 @@
-﻿using System;
+﻿using ScooterController.InstructionSet;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 
-namespace ScooterController
+namespace ScooterController.Interpreter
 {
     class InstructionInterpreter
     {

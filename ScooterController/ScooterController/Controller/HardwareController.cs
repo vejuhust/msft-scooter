@@ -1,8 +1,10 @@
-﻿
+﻿using ScooterController.Configuration;
+using ScooterController.HardwareAbstractionLayer;
+using ScooterController.InstructionSet;
 using System;
 using System.Threading;
 
-namespace ScooterController
+namespace ScooterController.Controller
 {
     class HardwareController
     {
