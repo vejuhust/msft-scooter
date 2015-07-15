@@ -1,8 +1,6 @@
-﻿
-using System;
-using System.Runtime.InteropServices;
+﻿using System.Runtime.InteropServices;
 
-namespace ScooterController
+namespace ScooterController.HardwareAbstractionLayer
 {
     static class UsbRelayDevice
     {

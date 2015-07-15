@@ -1,13 +1,36 @@
-﻿using System;
+﻿using ScooterController.Controller;
+using ScooterController.InstructionSet;
+using ScooterController.Interpreter;
+using System;
 
 namespace ScooterController
 {
     class Program
     {
+        static void Main(string[] args)
+        {
+            if (args.Length >= 1)
+            {
+                var param = args[0].ToLower();
+                if (param == "kb" || param == "key" || param == "keyboard")
+                {
+                    ExecuteInstructionFromKeyboard();
+                }
+                else
+                {
+                    ExecuteInstructionFromFile(args[0]);
+                }
+            }
+            else
+            {
+                ExecuteInstructionFromConsole();
+            }
+        }
+
         private static void ExecuteInstructionFromFile(string filename)
         {
             var parser = new InstructionInterpreter(filename);
-            var controller = new HardwareController();
+            var controller = new HardwareInstructionController();
 
             HardwareInstruction instruction;
             while ((instruction = parser.GetNextInstruction()) != null)
@@ -31,7 +54,7 @@ namespace ScooterController
             var instructionCounter = 0;
 
             var parser = new InstructionInterpreter();
-            var controller = new HardwareController();
+            var controller = new HardwareInstructionController();
 
             while (true)
             {
@@ -68,16 +91,20 @@ namespace ScooterController
             }
         }
 
-        static void Main(string[] args)
+        private static void ExecuteInstructionFromKeyboard()
         {
-            if (args.Length >= 1)
+            Console.WriteLine("Welcome to Scooter Keyboard!");
+            Console.WriteLine("# Use WASD Keys, Alt and SpaceBar to Control.");
+
+            var controller = new HardwareKeyboardController();
+            do
             {
-                ExecuteInstructionFromFile(args[0]);
-            }
-            else
-            {
-                ExecuteInstructionFromConsole();
-            }
+                controller.ExecuteKeyboardInstruction();
+                controller.Suspend(0.05);
+            } while (!controller.ShouldExit());
+
+            Console.SetCursorPosition(0, Console.CursorTop);
+            Console.WriteLine("Goodbye~");
         }
     }
 }
