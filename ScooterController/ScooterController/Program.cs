@@ -1,12 +1,26 @@
 ﻿using ScooterController.Controller;
+using ScooterController.HardwareAbstractionLayer;
 using ScooterController.InstructionSet;
 using ScooterController.Interpreter;
 using System;
+using System.Threading;
 
 namespace ScooterController
 {
     class Program
     {
+        static void Main(string[] args)
+        {
+            if (args.Length >= 1)
+            {
+                ExecuteInstructionFromFile(args[0]);
+            }
+            else
+            {
+                ExecuteInstructionFromConsole();
+            }
+        }
+
         private static void ExecuteInstructionFromFile(string filename)
         {
             var parser = new InstructionInterpreter(filename);
@@ -68,18 +82,6 @@ namespace ScooterController
                 {
                     Console.WriteLine("[Invalid Instruction: {0}]", e.Message);
                 }
-            }
-        }
-
-        static void Main(string[] args)
-        {
-            if (args.Length >= 1)
-            {
-                ExecuteInstructionFromFile(args[0]);
-            }
-            else
-            {
-                ExecuteInstructionFromConsole();
             }
         }
     }

@@ -43,6 +43,7 @@
   <ItemGroup>
     <Compile Include="Controller\HardwareBaseController.cs" />
     <Compile Include="Controller\HardwareInstructionController.cs" />
+    <Compile Include="HardwareAbstractionLayer\NativeKeyboard.cs" />
     <Compile Include="InstructionSet\HardwareInstruction.cs" />
     <Compile Include="InstructionSet\HardwareSetBase.cs" />
     <Compile Include="Configuration\HardwareSetting.cs" />
