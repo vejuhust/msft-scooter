@@ -1,4 +1,5 @@
-﻿using ScooterController.Configuration;
+﻿using System;
+using ScooterController.Configuration;
 using ScooterController.HardwareAbstractionLayer;
 using System.Collections.Generic;
 using System.Linq;
@@ -61,6 +62,13 @@ namespace ScooterController.Controller
                         {
                             this.OpenChannel(targetChannel);
                             LogInfo("open for " + key);
+
+                            if (targetChannel == HardwareSetting.ChannelSpeedUp)
+                            {
+                                this.currentSpeed = (this.currentSpeed + 1) % 3;
+                                this.currentSpeed += this.currentSpeed == 0 ? 3 : 0;
+                                LogInfo("set speed " + this.currentSpeed.ToString());
+                            }
                         }
                         else
                         {

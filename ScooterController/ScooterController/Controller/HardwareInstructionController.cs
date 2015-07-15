@@ -5,8 +5,6 @@ namespace ScooterController.Controller
 {
     class HardwareInstructionController : HardwareBaseController
     {
-        private long currentSpeed = 1;
-
         public void ExecuteInstruction(HardwareInstruction instruction)
         {
             switch (instruction.Operator)

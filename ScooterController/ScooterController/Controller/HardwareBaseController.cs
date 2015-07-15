@@ -9,6 +9,8 @@ namespace ScooterController.Controller
     {
         private readonly int deviceHandle;
 
+        internal long currentSpeed = 1;
+
         public static void LogInfo(string message)
         {
             Console.WriteLine(message);
