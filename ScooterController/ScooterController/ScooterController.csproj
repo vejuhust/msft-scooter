@@ -43,7 +43,9 @@
   <ItemGroup>
     <Compile Include="HardwareController.cs" />
     <Compile Include="HardwareInstruction.cs" />
+    <Compile Include="HardwareSetBase.cs" />
     <Compile Include="HardwareSetting.cs" />
+    <Compile Include="HardwareStatusCommand.cs" />
     <Compile Include="InstructionInterpreter.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

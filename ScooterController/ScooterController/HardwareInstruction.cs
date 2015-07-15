@@ -1,14 +1,8 @@
 ﻿
 namespace ScooterController
 {
-    class HardwareInstruction
+    class HardwareInstruction : HardwareSetBase
     {
-        public static char[] OperatorSeparators = {' ', '\t'};
-
-        public static string CommentSymbol = ";";
-
-        public HardwareOperator Operator { get; private set; }
-
         public long Operand { get; private set; }
 
         public bool HasOperand { get; private set; }
