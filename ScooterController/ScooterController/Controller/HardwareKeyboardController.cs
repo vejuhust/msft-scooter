@@ -24,22 +24,12 @@ namespace ScooterController.Controller
 
         private readonly Dictionary<KeyCode, int> keyChannelMapping = new Dictionary<KeyCode, int>()
         {
-            { KeyCode.ArrowUp, HardwareSetting.ChannelMoveForward },
-            //{ KeyCode.LetterW, HardwareSetting.ChannelMoveForward },
-            
-            { KeyCode.ArrowDown, HardwareSetting.ChannelMoveBack },
-            //{ KeyCode.LetterS, HardwareSetting.ChannelMoveBack },
-                 
-            { KeyCode.ArrowLeft, HardwareSetting.ChannelTurnLeft },
-            //{ KeyCode.LetterA, HardwareSetting.ChannelTurnLeft },
-                  
-            { KeyCode.ArrowRight, HardwareSetting.ChannelTurnRight },
-            //{ KeyCode.LetterD, HardwareSetting.ChannelTurnRight },
-            
+            { KeyCode.LetterW, HardwareSetting.ChannelMoveForward },
+            { KeyCode.LetterS, HardwareSetting.ChannelMoveBack },
+            { KeyCode.LetterA, HardwareSetting.ChannelTurnLeft },
+            { KeyCode.LetterD, HardwareSetting.ChannelTurnRight },
             { KeyCode.Alt, HardwareSetting.ChannelSpeedUp },
-
             { KeyCode.SpaceBar, HardwareSetting.ChannelBrake },
-            //{ KeyCode.Escape, HardwareSetting.ChannelBrake },
         };
 
         public HardwareKeyboardController()
