@@ -41,7 +41,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Controller\HardwareController.cs" />
+    <Compile Include="Controller\HardwareBaseController.cs" />
+    <Compile Include="Controller\HardwareInstructionController.cs" />
     <Compile Include="InstructionSet\HardwareInstruction.cs" />
     <Compile Include="InstructionSet\HardwareSetBase.cs" />
     <Compile Include="Configuration\HardwareSetting.cs" />

@@ -10,7 +10,7 @@ namespace ScooterController
         private static void ExecuteInstructionFromFile(string filename)
         {
             var parser = new InstructionInterpreter(filename);
-            var controller = new HardwareController();
+            var controller = new HardwareInstructionController();
 
             HardwareInstruction instruction;
             while ((instruction = parser.GetNextInstruction()) != null)
@@ -34,7 +34,7 @@ namespace ScooterController
             var instructionCounter = 0;
 
             var parser = new InstructionInterpreter();
-            var controller = new HardwareController();
+            var controller = new HardwareInstructionController();
 
             while (true)
             {
