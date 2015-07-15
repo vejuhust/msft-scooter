@@ -1,9 +1,7 @@
 ﻿using ScooterController.Controller;
-using ScooterController.HardwareAbstractionLayer;
 using ScooterController.InstructionSet;
 using ScooterController.Interpreter;
 using System;
-using System.Threading;
 
 namespace ScooterController
 {
@@ -31,14 +29,15 @@ namespace ScooterController
 
         private static void ExecuteInstructionFromKeyboard()
         {
-            Console.WriteLine("ExecuteInstructionFromKeyboard");
+            Console.WriteLine("Welcome to Scooter Keyboard!");
+            Console.WriteLine("# Use Arrow Keys, Alt and Spacebar to Control.");
 
             var controller = new HardwareKeyboardController();
             do
             {
-                var keys = controller.GetPressedKeys();
-                Console.WriteLine(keys.Count);
-            } while (true);
+                controller.ExecuteKeyboardInstruction();
+                controller.Suspend(0.05);
+            } while (!controller.ShouldExit());
         }
 
         private static void ExecuteInstructionFromFile(string filename)
