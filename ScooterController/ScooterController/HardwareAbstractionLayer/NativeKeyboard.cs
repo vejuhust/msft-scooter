@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿
 namespace ScooterController.HardwareAbstractionLayer
 {
     /// <summary>
@@ -15,6 +10,11 @@ namespace ScooterController.HardwareAbstractionLayer
     /// </remarks>
     internal enum KeyCode : int
     {
+        /// <summary>
+        /// The escape key.
+        /// </summary>
+        Escape = 0x1B,
+
         /// <summary>
         /// The alt key.
         /// </summary>
@@ -92,7 +92,7 @@ namespace ScooterController.HardwareAbstractionLayer
         /// <summary>
         /// Gets the key state of a key.
         /// </summary>
-        /// <param name="key">Virtuak-key code for key.</param>
+        /// <param name="key">Virtual-key code for key.</param>
         /// <returns>The state of the key.</returns>
         [System.Runtime.InteropServices.DllImport("user32.dll")]
         private static extern short GetKeyState(int key);

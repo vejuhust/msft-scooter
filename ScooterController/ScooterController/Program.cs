@@ -13,12 +13,32 @@ namespace ScooterController
         {
             if (args.Length >= 1)
             {
-                ExecuteInstructionFromFile(args[0]);
+                var param = args[0].ToLower();
+                if (param == "kb" || param == "key" || param == "keyboard")
+                {
+                    ExecuteInstructionFromKeyboard();
+                }
+                else
+                {
+                    ExecuteInstructionFromFile(args[0]);
+                }
             }
             else
             {
                 ExecuteInstructionFromConsole();
             }
+        }
+
+        private static void ExecuteInstructionFromKeyboard()
+        {
+            Console.WriteLine("ExecuteInstructionFromKeyboard");
+
+            var controller = new HardwareKeyboardController();
+            do
+            {
+                var keys = controller.GetPressedKeys();
+                Console.WriteLine(keys.Count);
+            } while (true);
         }
 
         private static void ExecuteInstructionFromFile(string filename)
