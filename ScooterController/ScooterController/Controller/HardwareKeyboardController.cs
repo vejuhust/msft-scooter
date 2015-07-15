@@ -12,7 +12,7 @@ namespace ScooterController.Controller
         private readonly IEnumerable<KeyCode> allKeys;
         private readonly IEnumerable<KeyCode> actionKeys;
 
-        private readonly Dictionary<int, bool> actionChannelStatus = new Dictionary<int, bool>()
+        private readonly Dictionary<int, bool> channelStatus = new Dictionary<int, bool>()
         {
             { HardwareSetting.ChannelMoveForward, false },
             { HardwareSetting.ChannelMoveBack, false },
@@ -52,11 +52,7 @@ namespace ScooterController.Controller
         {
             var keys = this.GetPressedKeys();
 
-            if (keys.Count == 0)
-            {
-                this.CloseAllActionChannel();
-            }
-            else if (keys.Contains(KeyCode.Escape))
+            if (keys.Contains(KeyCode.Escape))
             {
                 this.CloseAllActionChannel();
                 this.isEscapePressed = true;
@@ -67,7 +63,7 @@ namespace ScooterController.Controller
                 {
                     var targetStatus = keys.Contains(key);
                     var targetChannel = this.keyChannelMapping[key];
-                    var currentStatus = this.actionChannelStatus[targetChannel];
+                    var currentStatus = this.channelStatus[targetChannel];
 
                     if (targetStatus != currentStatus)
                     {
@@ -82,7 +78,7 @@ namespace ScooterController.Controller
                             LogInfo("close for " + key);
                         }
 
-                        this.actionChannelStatus[targetChannel] = targetStatus;
+                        this.channelStatus[targetChannel] = targetStatus;
                     }
                 }
             }
@@ -95,12 +91,11 @@ namespace ScooterController.Controller
 
         private void CloseAllActionChannel()
         {
-            var activeChannels = this.actionChannelStatus.Where(channelStatus => channelStatus.Value).Select(channel => channel.Key).ToList();
+            var activeChannels = this.channelStatus.Where(status => status.Value).Select(channel => channel.Key).ToList();
             foreach (var channel in activeChannels)
             {
-                LogInfo("close");
                 this.CloseChannel(channel);
-                this.actionChannelStatus[channel] = false;
+                this.channelStatus[channel] = false;
             }
         }
 
