@@ -15,7 +15,7 @@ namespace ConsoleApplication1
         {
             Console.OutputEncoding = Encoding.UTF8;
 
-            var navigation = new Navigator();
+            var navigation = new Navigator(/*ChangePortName is needed*/);
             var logger = new Logger(navigation);
             //var route1 = navigation.GetRoute(@"北京市鼓楼东大街46号", @"三里屯");
             //var routing = new Routing();

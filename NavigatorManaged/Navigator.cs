@@ -10,13 +10,18 @@ namespace NavigatorManaged
 {
     public class Navigator
     {
-        private ComPortReader comPort = new ComPortReader();
+        private ComPortReader comPort;
 
         private Routing routing = new Routing();
 
         public Coordinates currentCordinates { get; private set; }
 
         public string currentLocation { get; private set; }
+
+        public Navigator(string portName = @"COM3")
+        {
+            comPort = new ComPortReader(portName);
+        }
 
         public void Connect()
         {

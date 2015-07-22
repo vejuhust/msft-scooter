@@ -33,7 +33,7 @@ namespace NavigatorManaged
                 var data = string.Format(@"Date:{0}, Time:{1}, Latitude:{2}, Longitude:{3}, CurrentSpeed:{4} km/h", DateTime.Now.Date, DateTime.Now.ToString("h:mm:ss tt"), lat, lon, speed);
                 var data1 = string.Format(@"{0}, {1}, {2}, {3}, {4}", DateTime.Now.Date, DateTime.Now.ToString("h:mm:ss tt"), nav.getLatitude(), nav.getLongitude(), lat, lon, speed);
                 Console.WriteLine(data);
-                logger.Info(data);
+                logger.Info(data1);
             }
             
         }
