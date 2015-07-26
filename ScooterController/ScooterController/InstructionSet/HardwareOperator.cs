@@ -1,7 +1,7 @@
 ﻿
 namespace ScooterController.InstructionSet
 {
-    enum HardwareOperator
+    public enum HardwareOperator
     {
         NoOp,           /* 0: <blank> */
         PowerOn,        /* 1: on */

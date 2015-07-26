@@ -1,7 +1,7 @@
 ﻿
 namespace ScooterController.InstructionSet
 {
-    class HardwareInstruction : HardwareSetBase
+    public class HardwareInstruction : HardwareSetBase
     {
         public long Operand { get; private set; }
 

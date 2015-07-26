@@ -19,6 +19,12 @@ namespace ConsoleApplication1
             var logger = new Logger(navigation);
             //var route1 = navigation.GetRoute(@"北京市鼓楼东大街46号", @"三里屯");
             //var routing = new Routing();
+            var destination = @"独墅湖体育馆";
+            if (args.Length > 0)
+            {
+                destination = args[0];
+            }
+
             try
             {
                 navigation.Connect();
@@ -31,7 +37,7 @@ namespace ConsoleApplication1
                     if (!String.IsNullOrEmpty(currentLocation))
                     {
                         //var route1 = navigation.GetRoute(@"北京市鼓楼东大街46号", @"三里屯");
-                        var route = navigation.GetRoute(currentLocation, @"三里屯");
+                        var route = navigation.GetRoute(currentLocation, destination);
                         Console.WriteLine(@"Current Location is :", navigation.GetCurrentLocation());
                     }
                     
