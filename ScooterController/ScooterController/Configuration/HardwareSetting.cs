@@ -3,7 +3,9 @@ namespace ScooterController.Configuration
 {
     static class HardwareSetting
     {
-        public static string SerialNumber = "FDP2R";
+        //public static string SerialNumber = "FDP2R";
+        public static string SerialNumber = "FPIWS";
+
 
         public static int ChannelPower = 5;
 
@@ -25,7 +27,7 @@ namespace ScooterController.Configuration
 
         public static double IntervalInstruction = 0.5;
 
-        public static double IntervalMoveForward = 1.5;
+        public static double IntervalMoveForward = 1.0;
 
         public static double IntervalMoveBack = 1.9;
 

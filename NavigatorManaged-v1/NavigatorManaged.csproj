@@ -4,16 +4,15 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{C8A6C6EA-F427-4442-A70E-5AEF534053BF}</ProjectGuid>
-    <OutputType>Exe</OutputType>
+    <ProjectGuid>{CB73A6EE-6CB8-4458-96B5-EBFD507CBEB0}</ProjectGuid>
+    <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>ScooterController</RootNamespace>
-    <AssemblyName>ScooterController</AssemblyName>
+    <RootNamespace>NavigatorManaged</RootNamespace>
+    <AssemblyName>NavigatorManaged</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -23,7 +22,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -32,8 +30,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="NLog">
+      <HintPath>..\packages\NLog.4.0.1\lib\net45\NLog.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -41,34 +43,22 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Controller\HardwareBaseController.cs" />
-    <Compile Include="Controller\HardwareInstructionController.cs" />
-    <Compile Include="Controller\HardwareKeyboardController.cs" />
-    <Compile Include="Controller\HardwareStatusCommandController.cs" />
-    <Compile Include="HardwareAbstractionLayer\NativeKeyboard.cs" />
-    <Compile Include="InstructionSet\HardwareInstruction.cs" />
-    <Compile Include="InstructionSet\HardwareSetBase.cs" />
-    <Compile Include="Configuration\HardwareSetting.cs" />
-    <Compile Include="InstructionSet\HardwareStatusCommand.cs" />
-    <Compile Include="Interpreter\InstructionInterpreter.cs" />
-    <Compile Include="Program.cs" />
+    <Compile Include="ComPortReader.cs" />
+    <Compile Include="DataModels\DataContracts.cs" />
+    <Compile Include="DataModels\GPSInstruction.cs" />
+    <Compile Include="DataModels\GpsSpeed.cs" />
+    <Compile Include="Helper.cs" />
+    <Compile Include="DataModels\LatitudeLongitude.cs" />
+    <Compile Include="Logger.cs" />
+    <Compile Include="Navigator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="InstructionSet\HardwareOperator.cs" />
-    <Compile Include="HardwareAbstractionLayer\UsbRelayDevice.cs" />
+    <Compile Include="Routing.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
-    <None Include="Script\test.scl">
+    <None Include="NLog.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Script\demo.scl">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <Content Include="usb_relay_device.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

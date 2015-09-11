@@ -54,34 +54,38 @@ namespace ScooterController
             var instructionCounter = 0;
 
             var parser = new InstructionInterpreter();
-            var controller = new HardwareInstructionController();
+            ////var controller = new HardwareInstructionController();
+            var controller = new HardwareStatusCommandController();
+            string inputLine;
 
             while (true)
+            //while ((inputLine = Console.ReadLine()) != null)
             {
                 instructionCounter++;
 
                 Console.Write("\n>>{0:D4}>>> ", instructionCounter);
-                var inputLine = Console.ReadLine();
+                while ((inputLine = Console.ReadLine()) == null)
+                {
+                };
 
                 try
                 {
-                    var instruction = parser.InterpretRawLine(inputLine);
-                    if (instruction == null)
+                    if(inputLine.Equals("exit"))
+                    {
+                        break;
+                    }
+                    if (string.IsNullOrWhiteSpace(inputLine))
+                    {
+                        Console.WriteLine("[Is NullOrWhiteSpace input]");
+                        continue;
+                    }
+                    if (string.IsNullOrWhiteSpace(inputLine))
                     {
                         Console.WriteLine("[Blank Instruction]");
                     }
                     else
                     {
-                        Console.WriteLine("[{0}{1}]", instruction.Operator, instruction.HasOperand ? " " + instruction.Operand : string.Empty);
-
-                        if (instruction.Operator == HardwareOperator.NoOp || instruction.Operator == HardwareOperator.Exit)
-                        {
-                            break;
-                        }
-                        else
-                        {
-                            controller.ExecuteInstruction(instruction);
-                        }
+                        controller.ExecuteStatusCommand(inputLine);
                     }
                 }
                 catch (Exception e)

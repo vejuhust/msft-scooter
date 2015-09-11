@@ -26,6 +26,7 @@ namespace ScooterController.Interpreter
             { HardwareOperator.MoveBack, "bk" },     
             { HardwareOperator.TurnLeft, "lt" },     
             { HardwareOperator.TurnRight, "rt" },     
+            { HardwareOperator.Brake, "st" },
         };
 
         public InstructionInterpreter()
