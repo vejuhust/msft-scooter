@@ -5,7 +5,7 @@ using System.Threading;
 
 namespace ScooterController.Controller
 {
-    class HardwareBaseController
+    public class HardwareBaseController
     {
         private readonly int deviceHandle;
 

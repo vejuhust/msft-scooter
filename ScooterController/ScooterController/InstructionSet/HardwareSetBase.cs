@@ -1,6 +1,6 @@
 ﻿namespace ScooterController.InstructionSet
 {
-    internal class HardwareSetBase
+    public class HardwareSetBase
     {
         public static char[] OperatorSeparators = { ' ', '\t' };
 

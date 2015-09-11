@@ -3,7 +3,7 @@ using ScooterController.InstructionSet;
 
 namespace ScooterController.Controller
 {
-    class HardwareInstructionController : HardwareBaseController
+    public class HardwareInstructionController : HardwareBaseController
     {
         public void ExecuteInstruction(HardwareInstruction instruction)
         {
