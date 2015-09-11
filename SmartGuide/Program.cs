@@ -26,6 +26,7 @@ namespace SmartGuide
             public double lgt { get; set; }
         }
 
+
         private const float margin = 0.001f;
         private const float epsilon = 0.0001f;
         public static float Position2Direcion(Coordinate srcCoordinates, Coordinate desCoordinates, Coordinate curCoordinates)
@@ -82,10 +83,10 @@ namespace SmartGuide
             //right
             return 0.0f;
         }
+        private const long numIntervalTurn = 1;
 
         static void Main(string[] args)
         {
-            long numIntervalTurn = 1;
             Console.OutputEncoding = Encoding.UTF8;
 
             var navigation = new Navigator(/*ChangePortName is needed*/);
@@ -122,13 +123,13 @@ namespace SmartGuide
                 var srcLgt = navigation.getLongitude();
                 var srcCoordinate = new Coordinate(srcLat, srcLgt);
                 var desCoordinate = new Coordinate(desLat, desLgt);
-                var controller = new HardwareInstructionController();
+                ////var controller = new HardwareInstructionController();
                 var op = HardwareOperator.Brake;
                 var instruction = new HardwareInstruction(op, 2 * numIntervalTurn);
-                controller.ExecuteInstruction(instruction);
+                ////controller.ExecuteInstruction(instruction);
                 op = HardwareOperator.MoveForward;
                 instruction = new HardwareInstruction(op, 2 * numIntervalTurn);
-                controller.ExecuteInstruction(instruction);
+                ////controller.ExecuteInstruction(instruction);
                 while (s.Elapsed < TimeSpan.FromSeconds(600) )
                 {
                     if (s.Elapsed.Seconds%10 == 5)
@@ -142,38 +143,33 @@ namespace SmartGuide
                         if (direction > 99)
                         {
                             op = HardwareOperator.Brake;
+                            Console.WriteLine("st");
                         }
                         else if (direction > 0.5)
                         {
-                            op = HardwareOperator.TurnLeft;
+                            op = HardwareOperator.TurnRight;
+                            Console.WriteLine("rt");
                         }
                         else if (direction < -0.5)
                         {
                             op = HardwareOperator.TurnLeft;
+                            Console.WriteLine("lt");
                         }
                         else
                         {
+                            Console.WriteLine("NOP");
                             continue; // do No Op
                         }
 
                         try
                         {
                             instruction = new HardwareInstruction(op, numIntervalTurn);
-                            ////controller.ExecuteInstruction(instruction);
                         }
                         catch (Exception e)
                         {
                             Console.WriteLine("[Invalid Instruction: {0}]", e.Message);
-                            ////continue;
                         }
-
                     }
-                    ////var currentLocation = navigation.GetCurrentLocation();
-                    ////if (!String.IsNullOrEmpty(currentLocation))
-                    ////{
-                    ////    var route = navigation.GetRoute(currentLocation, destination);
-                    ////    Console.WriteLine(@"Current Location is :", navigation.GetCurrentLocation());
-                    ////}
                 }
             }
 

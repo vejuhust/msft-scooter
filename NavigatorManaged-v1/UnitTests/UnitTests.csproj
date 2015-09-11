@@ -4,16 +4,15 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{C8A6C6EA-F427-4442-A70E-5AEF534053BF}</ProjectGuid>
+    <ProjectGuid>{DFDE2746-07FB-41DA-A69D-A6DCDF2173DE}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>ScooterController</RootNamespace>
-    <AssemblyName>ScooterController</AssemblyName>
+    <RootNamespace>UnitTests</RootNamespace>
+    <AssemblyName>UnitTests</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -23,13 +22,15 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -41,34 +42,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Controller\HardwareBaseController.cs" />
-    <Compile Include="Controller\HardwareInstructionController.cs" />
-    <Compile Include="Controller\HardwareKeyboardController.cs" />
-    <Compile Include="Controller\HardwareStatusCommandController.cs" />
-    <Compile Include="HardwareAbstractionLayer\NativeKeyboard.cs" />
-    <Compile Include="InstructionSet\HardwareInstruction.cs" />
-    <Compile Include="InstructionSet\HardwareSetBase.cs" />
-    <Compile Include="Configuration\HardwareSetting.cs" />
-    <Compile Include="InstructionSet\HardwareStatusCommand.cs" />
-    <Compile Include="Interpreter\InstructionInterpreter.cs" />
-    <Compile Include="Program.cs" />
+    <Compile Include="Class1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="InstructionSet\HardwareOperator.cs" />
-    <Compile Include="HardwareAbstractionLayer\UsbRelayDevice.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
-    <None Include="Script\test.scl">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Script\demo.scl">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <Content Include="usb_relay_device.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
+    <ProjectReference Include="..\NavigatorManaged\NavigatorManaged.csproj">
+      <Project>{cb73a6ee-6cb8-4458-96b5-ebfd507cbeb0}</Project>
+      <Name>NavigatorManaged</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
