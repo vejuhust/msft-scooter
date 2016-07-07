@@ -3,8 +3,8 @@ namespace ScooterController.Configuration
 {
     static class HardwareSetting
     {
-        //public static string SerialNumber = "FDP2R";
-        public static string SerialNumber = "FPIWS";
+        public static string SerialNumber = "FDP2R";
+        //public static string SerialNumber = "FPIWS";
 
 
         public static int ChannelPower = 5;
